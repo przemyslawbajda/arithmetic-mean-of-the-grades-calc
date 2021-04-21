@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">lab1</string>
+    <string name="emptyText">Pole nie moze byc puste</string>
+    <string name="wrongNumber">Zakres liczb to 5-15</string>
+    <string name="imie">Imie</string>
+    <string name="wpisz_nazwisko">Wpisz nazwisko</string>
+    <string name="liczba_ocen">Liczba Ocen</string>
+    <string name="wpisz_liczbe_ocen_5_15">Wpisz liczbe ocen(5-15)</string>
+    <string name="oceny">Oceny</string>
+    <string name="wpisz_imie">Wpisz imie</string>
+    <string name="nazwisko">Nazwisko</string>
+    <string name="srednia">Oblicz srednia</string>
+    
+    //Grades
+    <string name="grade2">2</string>
+    <string name="grade3">3</string>
+    <string name="grade4">4</string>
+    <string name="grade5">5</string>
+    
+    <string-array name="subjectsTable">
+        <item>j. polski</item>
+        <item>j. angielski</item>
+        <item>matematyka</item>
+        <item>fizyka</item>
+        <item>W-F</item>
+    </string-array>
+
+
+</resources>
