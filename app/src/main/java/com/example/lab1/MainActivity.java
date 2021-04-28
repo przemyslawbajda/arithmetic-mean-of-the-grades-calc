@@ -17,31 +17,34 @@ public class MainActivity extends AppCompatActivity {
     EditText surname;
     EditText gradesNumber;
     Button ocenyButton;
+    TextView textResult;
 
 
     private static final String NAME_TEXT = "Name";
     private static final String SURNAME_TEXT = "Surname";
     private static final String GRADES_NUM = "Grades Number";
     private static final String BUTTON_VISIBILTY = "Button Visibility";
+    private static String averageText = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //get references
         setContentView(R.layout.activity_main_constraint);
         name = findViewById(R.id.editTextImie);
         surname = findViewById(R.id.editTextNazwisko);
         gradesNumber = findViewById(R.id.editTextOceny);
         ocenyButton = findViewById(R.id.buttonOceny);
-
+        textResult = findViewById(R.id.textResult);
 
         if (savedInstanceState != null){
-
+            //data loading on screen rotation
             name.setText( savedInstanceState.getString(NAME_TEXT));
             surname.setText(savedInstanceState.getString(SURNAME_TEXT));
             gradesNumber.setText(savedInstanceState.getString(GRADES_NUM));
             ocenyButton.setVisibility(savedInstanceState.getInt(BUTTON_VISIBILTY));
-
+            textResult.setText(savedInstanceState.getString(averageText));
         }
 
 
@@ -180,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putString(SURNAME_TEXT, surname.getText().toString());
         outState.putString(GRADES_NUM, gradesNumber.getText().toString());
         outState.putInt(BUTTON_VISIBILTY, ocenyButton.getVisibility());
+        outState.putString(averageText,  textResult.getText().toString());
 
         super.onSaveInstanceState(outState);
     }
@@ -192,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle activityResultBundle = result.getExtras();
 
             double avgResult = activityResultBundle.getDouble("Result");
-            TextView textResult = findViewById(R.id.textResult);
+
             String resultString = String.format("%.2f", avgResult);
             textResult.setText(getString(R.string.yourAverage )+ " " + resultString );
 

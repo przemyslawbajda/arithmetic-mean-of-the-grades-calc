@@ -25,14 +25,18 @@ public class OcenyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oceny);
 
+        //load bundle from MainActivity
         Bundle pakunek = getIntent().getExtras();
         gradesNumber = pakunek.getInt("gradeNumber");
         fillModelOceny(gradesNumber);
         adapter = new InteractiveArrayAdapter(this, gradeList);
 
+        //getting reference to listlayout
         ListaOcenRV = findViewById(R.id.listLayout);
         ListaOcenRV.setAdapter(adapter);
         ListaOcenRV.setLayoutManager(new LinearLayoutManager(this));
+
+        //getting reference and set OnClickListener
         setCalculateAvgButton();
 
     }
