@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -183,6 +184,19 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        super.onActivityResult(requestCode, resultCode, result);
 
+        if(resultCode == RESULT_OK){
+            Bundle activityResultBundle = result.getExtras();
+
+            double avgResult = activityResultBundle.getDouble("Result");
+            TextView textResult = findViewById(R.id.textResult);
+            String resultString = String.format("%.2f", avgResult);
+            textResult.setText(getString(R.string.yourAverage )+ " " + resultString );
+
+        }
+    }
 
 }

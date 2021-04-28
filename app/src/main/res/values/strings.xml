@@ -23,7 +23,9 @@
         <item>matematyka</item>
         <item>fizyka</item>
         <item>W-F</item>
+        <item>Informatyka</item>
+        <item>Religia</item>
     </string-array>
 
-
+    <string name="yourAverage">Twoja średnia to: </string>
 </resources>

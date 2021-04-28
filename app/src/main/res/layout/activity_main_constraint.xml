@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -79,24 +80,30 @@
             android:hint="@string/wpisz_liczbe_ocen_5_15"
             android:inputType="number"
             app:layout_constraintStart_toEndOf="@+id/LiczbaOcen"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNazwisko"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNazwisko" />
 
         <Button
             android:id="@+id/buttonOceny"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="64dp"
             android:text="@string/oceny"
             android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/editTextOceny"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/editTextOceny" />
+
+        <TextView
+            android:id="@+id/textResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextOceny" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

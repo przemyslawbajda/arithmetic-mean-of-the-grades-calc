@@ -1,11 +1,11 @@
 package com.example.lab1;
 
-public class ModelOceny {
+public class GradeModel {
 
     private String subjectName;
     private int grade;
 
-    public ModelOceny(String subjectName, int grade){
+    public GradeModel(String subjectName, int grade){
         this.subjectName = subjectName;
         this.grade = grade;
     }

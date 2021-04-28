@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -14,21 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class InteraktywnyAdapterTablicy extends RecyclerView.Adapter<InteraktywnyAdapterTablicy.OcenyViewHolder> {
+public class InteractiveArrayAdapter extends RecyclerView.Adapter<InteractiveArrayAdapter.OcenyViewHolder> {
 
-        private List<ModelOceny> mListaOcen;
-        private LayoutInflater mPompka;
+        private List<GradeModel> gradeList;
+        private LayoutInflater layoutInflater;
 
 
-    public InteraktywnyAdapterTablicy(Activity kontekst, List<ModelOceny> listaOcen) {
-        mPompka = kontekst.getLayoutInflater();
-        this.mListaOcen = listaOcen;
+    public InteractiveArrayAdapter(Activity kontekst, List<GradeModel> listaOcen) {
+        layoutInflater = kontekst.getLayoutInflater();
+        this.gradeList = listaOcen;
     }
 
     @NonNull
     @Override
     public OcenyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View wiersz = mPompka.inflate(R.layout.wiersz_listy, null);
+        View wiersz = layoutInflater.inflate(R.layout.wiersz_listy, null);
 
         return new OcenyViewHolder(wiersz);
     }
@@ -38,37 +37,23 @@ public class InteraktywnyAdapterTablicy extends RecyclerView.Adapter<Interaktywn
         //Wywolywana zawsze gdy ma być wyświetlony nowy wiersz
 
         //Get the correct grade from the data source
-        ModelOceny grade = mListaOcen.get(position);
+        GradeModel grade = gradeList.get(position);
 
         //Connect radio buttons group with a list row
-        holder.mRadioGroup.setTag(grade);
+        holder.mRadioGroup.setTag(position);
 
         //set name of the subject
         holder.mNameVH.setText(grade.getSubjectName());
 
+        //set default value on 2
+        holder.mRadioGroup.check(R.id.radioButton4);
 
-        //select radio button depending on grade value
-        switch(mListaOcen.get(position).getGrade()){
-            case 2:
-                holder.mRadioGroup.check(R.id.radioButton4);
-                break;
-            case 3:
-                holder.mRadioGroup.check(R.id.radioButton3);
-                break;
-            case 4:
-                holder.mRadioGroup.check(R.id.radioButton2);
-                break;
-            case 5:
-                holder.mRadioGroup.check(R.id.radioButton);
-                break;
-
-        }
 
     }
 
     @Override
     public int getItemCount() {
-        return mListaOcen.size();
+        return gradeList.size();
     }
 
 
@@ -83,6 +68,7 @@ public class InteraktywnyAdapterTablicy extends RecyclerView.Adapter<Interaktywn
         public OcenyViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            //read references to the row elements
             mNameVH = itemView.findViewById(R.id.gradeName);
             mRadioGroup = itemView.findViewById(R.id.radioGroup);
             mRadioButtons[0] = itemView.findViewById(R.id.radioButton4);
@@ -96,7 +82,30 @@ public class InteraktywnyAdapterTablicy extends RecyclerView.Adapter<Interaktywn
 
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            //kod tu
+
+            //get position of radio button
+            int position = (Integer) group.getTag();
+
+            //select radio button depending on Tag value
+        switch(checkedId){
+            case R.id.radioButton4:
+                //set grade value to the ArrayList element
+                gradeList.get(position).setGrade(2);
+
+                break;
+            case R.id.radioButton3:
+                gradeList.get(position).setGrade(3);
+
+                break;
+            case R.id.radioButton2:
+                gradeList.get(position).setGrade(4);
+
+                break;
+            case R.id.radioButton:
+                gradeList.get(position).setGrade(5);
+
+                break;
+        }
         }
     }
 }

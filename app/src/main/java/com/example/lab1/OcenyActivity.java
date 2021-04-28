@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +14,11 @@ import java.util.List;
 public class OcenyActivity extends AppCompatActivity {
 
     private static final int DEFAULT_GRADE = 2;
-    List<ModelOceny> mDane;
+    List<GradeModel> gradeList;
     int gradesNumber;
-    InteraktywnyAdapterTablicy adapter;
+    InteractiveArrayAdapter adapter;
     RecyclerView ListaOcenRV;
+    Button calculateAvgButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +28,47 @@ public class OcenyActivity extends AppCompatActivity {
         Bundle pakunek = getIntent().getExtras();
         gradesNumber = pakunek.getInt("gradeNumber");
         fillModelOceny(gradesNumber);
-        adapter = new InteraktywnyAdapterTablicy(this,mDane);
+        adapter = new InteractiveArrayAdapter(this, gradeList);
 
         ListaOcenRV = findViewById(R.id.listLayout);
         ListaOcenRV.setAdapter(adapter);
         ListaOcenRV.setLayoutManager(new LinearLayoutManager(this));
+        setCalculateAvgButton();
 
     }
 
     void fillModelOceny(int gradeNumber){
-        mDane = new ArrayList<ModelOceny>();
+        gradeList = new ArrayList<GradeModel>();
 
         String[] subjectsNames = getResources().getStringArray(R.array.subjectsTable);
 
         for(int i=0; i <gradeNumber; i++){
-            mDane.add(new ModelOceny(subjectsNames[i], DEFAULT_GRADE));
+            gradeList.add(new GradeModel(subjectsNames[i], DEFAULT_GRADE));
         }
+    }
+
+    void setCalculateAvgButton(){
+        calculateAvgButton = findViewById(R.id.calculateAvgButton);
+        calculateAvgButton.setOnClickListener(v -> {
+            returnAvg(calculateAvg());
+        });
+    }
+
+    double calculateAvg(){
+        int sum=0;
+        for(GradeModel grade: gradeList){
+            sum+= grade.getGrade();
+        }
+
+        return sum/(double) gradeList.size();
+    }
+
+    void returnAvg(double result){
+        Bundle resultBundle = new Bundle();
+        resultBundle.putDouble("Result", result);
+        Intent intent = new Intent();
+        intent.putExtras(resultBundle);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }
