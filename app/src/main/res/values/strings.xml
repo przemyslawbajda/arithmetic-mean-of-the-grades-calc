@@ -27,5 +27,11 @@
         <item>Religia</item>
     </string-array>
 
+    <string name="congratulationMessage">Gratulacje! Otrzymujesz zaliczenie!</string>
+    <string name="sendingAplicationMessage">Wysylam podanie o zaliczenie warunkowe</string>
+
+    <string name="congratulationButtonText">Super!</string>
+    <string name="notThisTimeButtonText">Tym razem Ci nie poszlo</string>
+
     <string name="yourAverage">Twoja średnia to: </string>
 </resources>
