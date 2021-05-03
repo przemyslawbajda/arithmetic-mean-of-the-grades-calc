@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String SURNAME_TEXT = "Surname";
     private static final String GRADES_NUM = "Grades Number";
     private static final String BUTTON_VISIBILTY = "Button Visibility";
-    private static String averageText = " ";
-    private static String gradeButtonText = "";
-    private boolean meanCalculated = false;
+    private static final String resultText = "ResultText";
+    private static final String gradeButtonText = "GradeButtonText";
+    private static boolean meanCalculated = false;
+
 
 
     @Override
@@ -41,19 +42,29 @@ public class MainActivity extends AppCompatActivity {
         ocenyButton = findViewById(R.id.buttonOceny);
         textResult = findViewById(R.id.textResult);
 
+        setListeners();
+
         if (savedInstanceState != null){
             //data loading on screen rotation
             name.setText( savedInstanceState.getString(NAME_TEXT));
             surname.setText(savedInstanceState.getString(SURNAME_TEXT));
             gradesNumber.setText(savedInstanceState.getString(GRADES_NUM));
             ocenyButton.setVisibility(savedInstanceState.getInt(BUTTON_VISIBILTY));
-            textResult.setText(savedInstanceState.getString(averageText));
+            textResult.setText(savedInstanceState.getString(resultText));
             ocenyButton.setText(savedInstanceState.getString(gradeButtonText));
+
+            //after screen rotation check if mean was calculated then set text and listener
+            if(meanCalculated){
+                setButtonTextAndListener(savedInstanceState.getString(gradeButtonText));
+            }
+
         }
 
-        setListeners();
 
-        //zrobic tak zeby po obrocie ostawial sie odpowiedni listener na ocenyButton
+
+        //zrobic tak zeby po obrocie ustawial sie odpowiedni listener na ocenyButton
+
+
 
     }
 
@@ -87,11 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+
+
         outState.putString(NAME_TEXT, name.getText().toString());
         outState.putString(SURNAME_TEXT, surname.getText().toString());
         outState.putString(GRADES_NUM, gradesNumber.getText().toString());
         outState.putInt(BUTTON_VISIBILTY, ocenyButton.getVisibility());
-        outState.putString(averageText,  textResult.getText().toString());
+        outState.putString(resultText,  textResult.getText().toString());
         outState.putString(gradeButtonText, ocenyButton.getText().toString());
 
         super.onSaveInstanceState(outState);
@@ -109,38 +122,41 @@ public class MainActivity extends AppCompatActivity {
             String resultString = String.format("%.2f", avgResult);
             textResult.setText(getString(R.string.yourAverage )+ " " + resultString );
 
-            meanCalculated = showMessage(avgResult);
+            meanCalculated = true;
+                    setMessage(avgResult);
 
         }
     }
 
-    private boolean showMessage(double avgResult){
+    private void setMessage(double avgResult){
         if(avgResult > 3.0){
-            setButtonTextAndListener(R.string.congratulationButtonText, R.string.congratulationMessage);
-
+            setButtonTextAndListener(getString(R.string.congratulationButtonText));
         }else{
-            setButtonTextAndListener(R.string.notThisTimeButtonText, R.string.sendingAplicationMessage);
-
+            setButtonTextAndListener(getString(R.string.notThisTimeButtonText));
         }
-        return true;
+
+
     }
 
-    private void setButtonTextAndListener(@StringRes int resid, @StringRes int resid2){
+    private void setButtonTextAndListener(String resid){
         ocenyButton.setText(resid);
 
-        ocenyButton.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this, resid2, Toast.LENGTH_LONG).show();
-            finish();
+        if(resid.equals(getString(R.string.congratulationButtonText)) ){
+            ocenyButton.setOnClickListener(v -> {
+                Toast.makeText(MainActivity.this, R.string.congratulationMessage, Toast.LENGTH_LONG).show();
+                finish();
 
-        });
+            });
+        }else if(resid.equals(getString(R.string.notThisTimeButtonText)) ){
+            Toast.makeText(MainActivity.this, R.string.emptyText, Toast.LENGTH_LONG ).show();
+            ocenyButton.setOnClickListener(v -> {
+                Toast.makeText(MainActivity.this, R.string.sendingAplicationMessage, Toast.LENGTH_LONG).show();
+                finish();
+
+            });
+        }
+
     }
-
-
-
-
-
-
-
 
 
     private void setListeners(){
