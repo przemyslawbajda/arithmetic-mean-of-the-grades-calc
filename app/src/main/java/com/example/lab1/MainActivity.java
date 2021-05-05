@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
             String resultString = String.format("%.2f", avgResult);
             textResult.setText(getString(R.string.yourAverage )+ " " + resultString );
 
+            name.setEnabled(false);
+            surname.setEnabled(false);
+            gradesNumber.setEnabled(false);
+
             meanCalculated = true;
                     setMessage(avgResult);
 
