@@ -25,6 +25,14 @@
         <item>W-F</item>
         <item>Informatyka</item>
         <item>Religia</item>
+        <item>geografia</item>
+        <item>plastyka</item>
+        <item>j.niemiecki</item>
+        <item>Technika</item>
+        <item>WOS</item>
+        <item>historia</item>
+        <item>BHP</item>
+        <item>Technika</item>
     </string-array>
 
     <string name="congratulationMessage">Gratulacje! Otrzymujesz zaliczenie!</string>

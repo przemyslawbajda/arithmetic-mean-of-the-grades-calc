@@ -45,10 +45,21 @@ public class InteractiveArrayAdapter extends RecyclerView.Adapter<InteractiveArr
         //set name of the subject
         holder.mNameVH.setText(grade.getSubjectName());
 
-        //set default value on 2
-        holder.mRadioGroup.check(R.id.radioButton4);
-
-
+        //set radio button depends on grade value
+        switch(gradeList.get(position).getGrade()){
+            case 2:
+                holder.mRadioGroup.check(R.id.radioButton4);
+                break;
+            case 3:
+                holder.mRadioGroup.check(R.id.radioButton3);
+                break;
+            case 4:
+                holder.mRadioGroup.check(R.id.radioButton2);
+                break;
+            case 5:
+                holder.mRadioGroup.check(R.id.radioButton);
+                break;
+        }
     }
 
     @Override

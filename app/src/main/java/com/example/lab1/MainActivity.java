@@ -60,13 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
-
-        //zrobic tak zeby po obrocie ustawial sie odpowiedni listener na ocenyButton
-
-
-
     }
+
 
     boolean isNumberCorrect(){
         int number = 0;
@@ -129,16 +124,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setMessage(double avgResult){
-        if(avgResult > 3.0){
+        if(avgResult >= 3.0){
             setButtonTextAndListener(getString(R.string.congratulationButtonText));
         }else{
             setButtonTextAndListener(getString(R.string.notThisTimeButtonText));
         }
 
-
     }
 
     private void setButtonTextAndListener(String resid){
+        //SET TEXT OF BUTTON
         ocenyButton.setText(resid);
 
         if(resid.equals(getString(R.string.congratulationButtonText)) ){
@@ -148,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
 
             });
         }else if(resid.equals(getString(R.string.notThisTimeButtonText)) ){
-            Toast.makeText(MainActivity.this, R.string.emptyText, Toast.LENGTH_LONG ).show();
             ocenyButton.setOnClickListener(v -> {
                 Toast.makeText(MainActivity.this, R.string.sendingAplicationMessage, Toast.LENGTH_LONG).show();
                 finish();
