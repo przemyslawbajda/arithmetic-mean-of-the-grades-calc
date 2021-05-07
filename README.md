@@ -1,0 +1,1 @@
+Android application that gets user input like first name, last name and number of grades in main activity. In second activity user can set grade values and when button is clicked the arithmetic mean is calculated and returned to main activity where value of mean is displayed. Depending on the value of the mean, proper toast message is displayed.
